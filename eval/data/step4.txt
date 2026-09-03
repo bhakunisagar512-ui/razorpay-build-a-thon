@@ -1,0 +1,27 @@
+
+====================================================================
+  CLASSIFIER — held-out test (n=12038, train n=27962)
+====================================================================
+  macro-F1 (decided rows) : 0.895
+  abstain -> AMBIGUOUS    : 16.7%
+  stage mix               : gated:low_conf 11%, gated:rules_hard_risk 6%, model 7%, rules 77%
+
+  cause                       recall  precision
+  BD_INSUFFICIENT_FUNDS         0.79       0.88
+  BD_USER_ABANDONED_OTP         0.95       0.91
+  CARD_EXPIRED                  0.82       0.95
+  RISK_BLOCKED                  0.68       0.94
+  TD_ISSUER_DOWN                0.38       0.86
+  TD_PSP_TIMEOUT                0.74       0.96
+
+  UNSAFE RETRIES (retry fired at a true hard decline):
+  209 of 2546 hard declines (8.21%)  <- the metric that must be ~0
+
+====================================================================
+  END-TO-END UPLIFT vs naive baseline (n=40000)
+====================================================================
+  oracle causes      +₹645/failure  (+41.8%)  CI [₹+551, ₹+737]  significant=True
+  predicted causes   +₹379/failure  (+25.3%)  CI [₹+286, ₹+467]  significant=True
+
+  classification cost: 41.8% -> 25.3% uplift (60% of oracle value retained)
+

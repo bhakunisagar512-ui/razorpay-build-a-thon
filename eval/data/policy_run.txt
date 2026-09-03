@@ -1,0 +1,22 @@
+
+==================================================================
+  MODE: POLICY   BASELINE: WEAK   n=40000  dupes dropped=1600
+  split_hash=11f566cce35c3cc7...
+==================================================================
+  treatment  n=36064  rate= 38.9%  gross=₹78,381,036  cost=₹ 18,227  net=₹78,362,808
+  holdout    n=3936   rate= 27.4%  gross=₹ 5,952,420  cost=₹      0  net=₹ 5,952,420
+
+  net per failure: treatment ₹2172.88  vs holdout ₹1512.30
+  difference: ₹+660.58  (+43.7%)
+  95% CI: [₹+566.50, ₹+751.23]   significant=True
+
+------------------------------------------------------------------
+  per-cause net recovery (₹)
+------------------------------------------------------------------
+  BD_INSUFFICIENT_FUNDS    treat ₹21,657,660 (34.1%)   hold ₹2,465,488 (36.1%)
+  BD_USER_ABANDONED_OTP    treat ₹20,645,037 (45.7%)   hold ₹       0 ( 0.0%)
+  CARD_EXPIRED             treat ₹4,325,433 (17.0%)   hold ₹       0 ( 0.0%)
+  RISK_BLOCKED             treat ₹  353,425 ( 2.2%)   hold ₹       0 ( 0.0%)
+  TD_ISSUER_DOWN           treat ₹14,288,154 (51.1%)   hold ₹1,371,135 (46.2%)
+  TD_PSP_TIMEOUT           treat ₹17,093,100 (77.2%)   hold ₹2,115,797 (79.7%)
+

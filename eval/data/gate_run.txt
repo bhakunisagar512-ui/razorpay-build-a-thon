@@ -1,0 +1,24 @@
+
+==================================================================
+  MODE: GATE   BASELINE: WEAK   n=40000  dupes dropped=1600
+  split_hash=11f566cce35c3cc7...
+==================================================================
+  treatment  n=36064  rate= 27.1%  gross=₹54,389,633  cost=₹      0  net=₹54,389,633
+  holdout    n=3936   rate= 27.3%  gross=₹ 6,156,360  cost=₹      0  net=₹ 6,156,360
+
+  net per failure: treatment ₹1508.14  vs holdout ₹1564.12
+  difference: ₹-55.97  (-3.6%)
+  95% CI: [₹-172.68, ₹+51.52]   significant=False
+
+  GATE PASS: both arms run the naive baseline, so the CI straddles zero as required.
+
+------------------------------------------------------------------
+  per-cause net recovery (₹)
+------------------------------------------------------------------
+  BD_INSUFFICIENT_FUNDS    treat ₹22,284,443 (35.8%)   hold ₹2,535,251 (34.1%)
+  BD_USER_ABANDONED_OTP    treat ₹        0 ( 0.0%)   hold ₹       0 ( 0.0%)
+  CARD_EXPIRED             treat ₹        0 ( 0.0%)   hold ₹       0 ( 0.0%)
+  RISK_BLOCKED             treat ₹        0 ( 0.0%)   hold ₹       0 ( 0.0%)
+  TD_ISSUER_DOWN           treat ₹14,099,783 (49.7%)   hold ₹1,464,658 (48.7%)
+  TD_PSP_TIMEOUT           treat ₹18,005,407 (81.1%)   hold ₹2,156,451 (81.8%)
+

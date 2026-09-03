@@ -1,0 +1,31 @@
+
+==========================================================================
+  TIER-3 ADVERSARIAL GATE TEST   (offline — zero API calls)
+  Every row is a way the LLM can misbehave. All must land on AMBIGUOUS.
+==========================================================================
+  PASS  hallucinated cause              -> AMBIGUOUS
+  PASS  cause not a string              -> AMBIGUOUS
+  PASS  missing cause                   -> AMBIGUOUS
+  PASS  null cause                      -> AMBIGUOUS
+  PASS  malformed json                  -> AMBIGUOUS
+  PASS  prose, not json                 -> AMBIGUOUS
+  PASS  empty response                  -> AMBIGUOUS
+  PASS  array not object                -> AMBIGUOUS
+  PASS  confidence as text              -> AMBIGUOUS
+  PASS  confidence out of range         -> AMBIGUOUS
+  PASS  negative confidence             -> AMBIGUOUS
+  PASS  below confidence floor          -> AMBIGUOUS
+  PASS  explicit abstention             -> AMBIGUOUS
+  PASS  prompt-injection echo           -> AMBIGUOUS
+
+  parser rejected 14/14
+
+  Well-formed but unsafe proposals (parser accepts; gate must reject):
+  PASS  retryable on high hard-mass     -> AMBIGUOUS  [gated:low_conf+llm_gated]
+  PASS  timeout on high hard-mass       -> AMBIGUOUS  [gated:low_conf+llm_gated]
+  PASS  issuer on high hard-mass        -> AMBIGUOUS  [gated:low_conf+llm_gated]
+  PASS  provider timeout                -> AMBIGUOUS
+
+  ======================================================================
+  CAUGHT 18/18   — tier 3 cannot lower the safety floor
+
