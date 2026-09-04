@@ -279,13 +279,29 @@ act "14 · Does tier 3 actually help?" \
 "Test rows rewritten to error codes absent from training by construction. Same
 rows, same model, same gate — the only difference is whether tier 3 is reachable."
 
-if [[ -n "${LLM_API_KEY:-}" ]]; then
+# if [[ -n "${LLM_API_KEY:-}" ]]; then
+#     run "docker compose exec -T api python -m eval.triage_eval --mode novel"
+#     $DC exec -T api python -m eval.triage_eval --mode novel --sample 1200
+# else
+#     warn "LLM_API_KEY not set — tier 3 is disabled"
+#     note "the system runs as a two-stage classifier with identical safety behaviour;"
+#     note "set LLM_API_KEY in .env and re-run to see the comparison"
+# fi
+
+# Ask the CONTAINER, not the host shell — .env is injected into the container
+# by compose and is not exported into this terminal.
+LLM_OK=$($DC exec -T api python -c \
+    "from services.app.adapters import llm_triage as T; print('yes' if T.available() else 'no')" \
+    2>/dev/null | tr -d '\r' | tail -1)
+
+if [[ "$LLM_OK" == "yes" ]]; then
     run "docker compose exec -T api python -m eval.triage_eval --mode novel"
     $DC exec -T api python -m eval.triage_eval --mode novel --sample 1200
 else
-    warn "LLM_API_KEY not set — tier 3 is disabled"
-    note "the system runs as a two-stage classifier with identical safety behaviour;"
-    note "set LLM_API_KEY in .env and re-run to see the comparison"
+    warn "tier 3 is disabled inside the container"
+    note "a key in .env is not enough — the container must be RECREATED, not restarted:"
+    note "  ./restart.sh          (docker compose restart will not work)"
+    note "the system runs as a two-stage classifier with identical safety behaviour"
 fi
 pause
 
